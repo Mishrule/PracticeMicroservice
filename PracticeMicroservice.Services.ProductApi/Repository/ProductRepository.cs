@@ -41,6 +41,7 @@ namespace PracticeMicroservice.Services.ProductApi.Repository
           return false;
         }
         _db.Products.Remove(product);
+        await _db.SaveChangesAsync();
         return true;
       }
       catch (Exception)
