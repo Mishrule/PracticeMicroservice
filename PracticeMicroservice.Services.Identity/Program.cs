@@ -1,4 +1,34 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using PracticeMicroservice.Services.Identity;
+using PracticeMicroservice.Services.Identity.DbContext;
+using PracticeMicroservice.Services.Identity.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+  .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+
+var build = builder.Services.AddIdentityServer(options =>
+{
+  options.Events.RaiseErrorEvents = true;
+  options.Events.RaiseInformationEvents = true;
+  options.Events.RaiseFailureEvents = true;
+  options.Events.RaiseSuccessEvents = true;
+  options.EmitStaticAudienceClaim = true;
+}).AddInMemoryIdentityResources(SD.IdentityResource)
+.AddInMemoryApiScopes(SD.ApiScopes)
+.AddInMemoryClients(SD.Clients)
+.AddAspNetIdentity<ApplicationUser>();
+
+//used in development mode
+build.AddDeveloperSigningCredential();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -17,7 +47,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapControllerRoute(
