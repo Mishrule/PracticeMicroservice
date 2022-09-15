@@ -5,11 +5,13 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{04D18C33-B312-4EDC-8D40-AB6BA60593F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeMicroservice.Web", "PracticeMicroservice.Web\PracticeMicroservice.Web.csproj", "{D27CDEA6-B405-47BA-819B-2A9381968CC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeMicroservice.Web", "PracticeMicroservice.Web\PracticeMicroservice.Web.csproj", "{D27CDEA6-B405-47BA-819B-2A9381968CC5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{822B3FED-EE14-4136-AEFF-634834E3FEAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeMicroservice.Services.ProductApi", "PracticeMicroservice.Services.ProductApi\PracticeMicroservice.Services.ProductApi.csproj", "{AEC350C8-5BCB-430C-AFEB-E04A24893065}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticeMicroservice.Services.ProductApi", "PracticeMicroservice.Services.ProductApi\PracticeMicroservice.Services.ProductApi.csproj", "{AEC350C8-5BCB-430C-AFEB-E04A24893065}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticeMicroservice.Services.Identity", "PracticeMicroservice.Services.Identity\PracticeMicroservice.Services.Identity.csproj", "{D7A64A7B-EC4A-4DEA-8917-0631CCCF1E01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{AEC350C8-5BCB-430C-AFEB-E04A24893065}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEC350C8-5BCB-430C-AFEB-E04A24893065}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEC350C8-5BCB-430C-AFEB-E04A24893065}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7A64A7B-EC4A-4DEA-8917-0631CCCF1E01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7A64A7B-EC4A-4DEA-8917-0631CCCF1E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7A64A7B-EC4A-4DEA-8917-0631CCCF1E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7A64A7B-EC4A-4DEA-8917-0631CCCF1E01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D27CDEA6-B405-47BA-819B-2A9381968CC5} = {04D18C33-B312-4EDC-8D40-AB6BA60593F0}
 		{AEC350C8-5BCB-430C-AFEB-E04A24893065} = {822B3FED-EE14-4136-AEFF-634834E3FEAE}
+		{D7A64A7B-EC4A-4DEA-8917-0631CCCF1E01} = {822B3FED-EE14-4136-AEFF-634834E3FEAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B185555-99EB-439C-ACE4-C59B4C41C98C}
