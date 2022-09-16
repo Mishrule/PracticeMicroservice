@@ -2,56 +2,32 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PracticeMicroservice.Services.Identity;
 using PracticeMicroservice.Services.Identity.DbContext;
+using PracticeMicroservice.Services.Identity.Initializer;
 using PracticeMicroservice.Services.Identity.Models;
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-  .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+//var builder = WebApplication.CreateBuilder(args);
+//var startup = new Startup(builder.Configuration);
+//startup.ConfigureServices(builder.Services);
 
 
-var build = builder.Services.AddIdentityServer(options =>
+//var app = builder.Build();
+
+//IDbInitializer dbInitializer = 
+
+//startup.Configure(app, builder.Environment, dbInitializer);
+
+namespace PracticeMicroservice.Services.Identity
 {
-  options.Events.RaiseErrorEvents = true;
-  options.Events.RaiseInformationEvents = true;
-  options.Events.RaiseFailureEvents = true;
-  options.Events.RaiseSuccessEvents = true;
-  options.EmitStaticAudienceClaim = true;
-}).AddInMemoryIdentityResources(SD.IdentityResource)
-.AddInMemoryApiScopes(SD.ApiScopes)
-.AddInMemoryClients(SD.Clients)
-.AddAspNetIdentity<ApplicationUser>();
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      CreateHostBuilder(args).Build().Run();
+    }
 
-//used in development mode
-build.AddDeveloperSigningCredential();
-
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-  app.UseExceptionHandler("/Home/Error");
-  // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-  app.UseHsts();
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+      Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+  }
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-app.UseIdentityServer();
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();
