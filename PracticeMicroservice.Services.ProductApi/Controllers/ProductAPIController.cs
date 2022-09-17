@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PracticeMicroservice.Services.ProductApi.Models.Dto;
 using PracticeMicroservice.Services.ProductApi.Repository;
 
@@ -16,6 +17,7 @@ namespace PracticeMicroservice.Services.ProductApi.Controllers
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<object> Get()
     {
       try
@@ -33,6 +35,7 @@ namespace PracticeMicroservice.Services.ProductApi.Controllers
     }
 
     [HttpGet]
+    [Authorize]
     [Route("{id}")]
     public async Task<object> Get(int id)
     {
@@ -51,6 +54,7 @@ namespace PracticeMicroservice.Services.ProductApi.Controllers
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<object> Post([FromBody] ProductDto productDto)
     {
       try
@@ -70,6 +74,7 @@ namespace PracticeMicroservice.Services.ProductApi.Controllers
 
 
     [HttpPut]
+    [Authorize]
     [Route("{id}")]
     public async Task<object> Put([FromBody] ProductDto productDto)
     {
@@ -88,6 +93,7 @@ namespace PracticeMicroservice.Services.ProductApi.Controllers
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Admin")]
     [Route("{id}")]
     public async Task<object> Delete(int id)
     {

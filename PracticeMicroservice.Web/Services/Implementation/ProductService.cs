@@ -3,7 +3,7 @@ using PracticeMicroservice.Web.Services.IServices;
 
 namespace PracticeMicroservice.Web.Services.Implementation
 {
-  public class ProductService:BaseService, IProductService
+  public class ProductService : BaseService, IProductService
   {
     private readonly IHttpClientFactory _clientFactory;
     public ProductService(IHttpClientFactory httpClient, IHttpClientFactory clientFactory) : base(httpClient)
@@ -11,55 +11,55 @@ namespace PracticeMicroservice.Web.Services.Implementation
       _clientFactory = clientFactory;
     }
 
-    public async Task<T> GetAllProductAsync<T>()
+    public async Task<T> GetAllProductsAsync<T>(string token)
     {
       return await this.SendAsync<T>(new ApiRequest()
       {
         ApiType = SD.ApiType.GET,
         Url = $"{SD.ProductAPIBase}/api/products",
-        AccessToken = ""
+        AccessToken = token
       });
     }
 
-    public async Task<T> GetProductByIdAsync<T>(int id)
+    public async Task<T> GetProductByIdAsync<T>(int id, string token)
     {
       return await this.SendAsync<T>(new ApiRequest()
       {
         ApiType = SD.ApiType.GET,
         Url = $"{SD.ProductAPIBase}/api/products/{id}",
-        AccessToken = ""
+        AccessToken = token
       });
     }
 
-    public async Task<T> CreateProductAsync<T>(ProductDto productDto)
+    public async Task<T> CreateProductAsync<T>(ProductDto productDto, string token)
     {
       return await this.SendAsync<T>(new ApiRequest()
       {
         ApiType = SD.ApiType.POST,
         Data = productDto,
         Url = $"{SD.ProductAPIBase}/api/products",
-        AccessToken = ""
+        AccessToken = token
       });
     }
 
-    public async Task<T> UpdateProductAsync<T>(ProductDto productDto)
+    public async Task<T> UpdateProductAsync<T>(ProductDto productDto, string token)
     {
       return await this.SendAsync<T>(new ApiRequest()
       {
         ApiType = SD.ApiType.PUT,
         Data = productDto,
         Url = $"{SD.ProductAPIBase}/api/products/{productDto.ProductId}",
-        AccessToken = ""
+        AccessToken = token
       });
     }
 
-    public async Task<T> DeleteProductAsync<T>(int id)
+    public async Task<T> DeleteProductAsync<T>(int id, string token)
     {
       return await this.SendAsync<T>(new ApiRequest()
       {
         ApiType = SD.ApiType.DELETE,
         Url = $"{SD.ProductAPIBase}/api/products/{id}",
-        AccessToken = ""
+        AccessToken = token
       });
 
     }

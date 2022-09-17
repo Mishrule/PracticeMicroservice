@@ -1,13 +1,12 @@
-﻿using System.Text;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PracticeMicroservice.Web.Models;
 using PracticeMicroservice.Web.Services.IServices;
-using JsonConverter = System.Text.Json.Serialization.JsonConverter;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace PracticeMicroservice.Web.Services.Implementation
 {
-  public class BaseService: IBaseService
+  public class BaseService : IBaseService
   {
     public ResponseDto _responseModel { get; set; }
     public IHttpClientFactory _httpClient { get; set; }
@@ -18,20 +17,25 @@ namespace PracticeMicroservice.Web.Services.Implementation
     }
 
 
-   
+
     public async Task<T> SendAsync<T>(ApiRequest apiRequest)
     {
       try
       {
         var client = _httpClient.CreateClient("PracticeMicroservice");
         HttpRequestMessage message = new HttpRequestMessage();
-        message.Headers.Add("Accept","application/json");
+        message.Headers.Add("Accept", "application/json");
         message.RequestUri = new Uri(apiRequest.Url);
         client.DefaultRequestHeaders.Clear();
         if (apiRequest.Data != null)
         {
           message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data), Encoding.UTF8,
             "application/json");
+        }
+
+        if (!string.IsNullOrEmpty(apiRequest.AccessToken))
+        {
+          client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.AccessToken);
         }
 
         HttpResponseMessage apiResponse = null;
@@ -65,7 +69,7 @@ namespace PracticeMicroservice.Web.Services.Implementation
         var dto = new ResponseDto
         {
           DisplayMessage = "Error",
-          ErrorMessages = new List<string>() {Convert.ToString(e.Message)},
+          ErrorMessages = new List<string>() { Convert.ToString(e.Message) },
           IsSuccess = false
         };
         var res = JsonConvert.SerializeObject(dto);
@@ -73,7 +77,7 @@ namespace PracticeMicroservice.Web.Services.Implementation
         return apiResponseDto;
       }
 
-      
+
     }
 
     public void Dispose()

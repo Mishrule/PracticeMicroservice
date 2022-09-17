@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Duende.IdentityServer;
+﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
+using System.Collections.Generic;
 
 namespace PracticeMicroservice.Services.IdentityServer
 {
@@ -41,8 +41,8 @@ namespace PracticeMicroservice.Services.IdentityServer
           ClientId = "practiceMicroservice",
           ClientSecrets = {new Secret("secret".Sha256())},
           AllowedGrantTypes= GrantTypes.Code,
-          RedirectUris = { "https://localhost:44334/signin-oidc" },
-          PostLogoutRedirectUris = {"https://localhost:44334/signout-callback-oidc"},
+          RedirectUris = { "https://localhost:7159/signin-oidc" },
+          PostLogoutRedirectUris = {"https://localhost:7159/signout-callback-oidc"},
           AllowedScopes = new List<string>
           {
             IdentityServerConstants.StandardScopes.OpenId,

@@ -1,18 +1,15 @@
+using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using PracticeMicroservice.Services.IdentityServer.DbContext;
 using PracticeMicroservice.Services.IdentityServer.Initializer;
 using PracticeMicroservice.Services.IdentityServer.Models;
+using PracticeMicroservice.Services.IdentityServer.Services;
 
 namespace PracticeMicroservice.Services.IdentityServer
 {
@@ -49,6 +46,7 @@ namespace PracticeMicroservice.Services.IdentityServer
         .AddAspNetIdentity<ApplicationUser>();
 
       services.AddScoped<IDbInitializer, DbInitializer>();
+      services.AddScoped<IProfileService, ProfileService>();
 
       //used in development mode
       builder.AddDeveloperSigningCredential();
