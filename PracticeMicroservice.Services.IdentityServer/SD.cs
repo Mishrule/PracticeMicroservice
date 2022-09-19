@@ -41,7 +41,8 @@ namespace PracticeMicroservice.Services.IdentityServer
           ClientId = "practiceMicroservice",
           ClientSecrets = {new Secret("secret".Sha256())},
           AllowedGrantTypes= GrantTypes.Code,
-          RedirectUris = { "https://localhost:7159/signin-oidc" },
+          //RedirectUris = { "https://localhost:7159/signin-oidc" },
+          RedirectUris = {"https://localhost:7159/signin-oidc"},
           PostLogoutRedirectUris = {"https://localhost:7159/signout-callback-oidc"},
           AllowedScopes = new List<string>
           {

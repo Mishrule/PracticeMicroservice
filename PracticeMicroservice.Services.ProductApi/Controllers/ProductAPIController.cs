@@ -17,7 +17,7 @@ namespace PracticeMicroservice.Services.ProductApi.Controllers
     }
 
     [HttpGet]
-    [Authorize]
+   // [Authorize]
     public async Task<object> Get()
     {
       try
@@ -35,7 +35,7 @@ namespace PracticeMicroservice.Services.ProductApi.Controllers
     }
 
     [HttpGet]
-    [Authorize]
+   // [Authorize]
     [Route("{id}")]
     public async Task<object> Get(int id)
     {
