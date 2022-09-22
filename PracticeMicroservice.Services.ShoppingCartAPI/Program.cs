@@ -31,7 +31,7 @@ namespace PracticeMicroservice.Services.ShoppingCartAPI
                 .AddJwtBearer("Bearer", options =>
                 {
 
-                  options.Authority = "https://localhost:44395/";
+                  options.Authority = "https://localhost:44395/";//URL of Identity Server
                   options.TokenValidationParameters = new TokenValidationParameters
                   {
                     ValidateAudience = false
@@ -97,7 +97,7 @@ namespace PracticeMicroservice.Services.ShoppingCartAPI
       }
 
       app.UseHttpsRedirection();
-
+      app.UseAuthentication();
       app.UseAuthorization();
 
       app.MapControllers();
